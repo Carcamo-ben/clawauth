@@ -13,7 +13,7 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build -w @clawauth/server && npm run build -w @clawauth/client && npm run build -w @clawauth/azure-functions && npm run build -w clawauth-example-azure-functions-cosmos",
     "test": "npm run test --workspaces --if-present",
     "lint": "echo \"(no lint configured yet)\"",
     "clean": "npm run clean --workspaces --if-present"

@@ -75,7 +75,7 @@ function makeHandler(auth: ClawAuthInstance, internalPath: string) {
           return {};
         }
       },
-      headers: { get: (n) => req.headers.get(n) }
+      headers: { get: (n: string) => req.headers.get(n) }
     };
     const res = await auth.handle(adapted, { ip });
     return {
