@@ -1,0 +1,26 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build-test-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Build all packages
+        run: npm run build
+      - name: Test all packages
+        run: npm test
+      - name: npm audit (gate on moderate+)
+        run: npm audit --audit-level=moderate
+      - name: Verify no secret-leak test was deleted
+        run: |
+          grep -r "scrub all log lines for any token material" packages/server/test/ \
+            || (echo "::error::secret-leak guardrail test was removed!" && exit 1)

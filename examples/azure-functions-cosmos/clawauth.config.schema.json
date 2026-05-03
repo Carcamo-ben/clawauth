@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "clawauth.config",
+  "type": "object",
+  "required": ["googleClientId"],
+  "properties": {
+    "googleClientId": {
+      "type": "string",
+      "description": "Google OAuth Client ID from console.cloud.google.com (Web application). No secret required for ID-token implicit flow."
+    },
+    "azure": {
+      "type": "object",
+      "properties": {
+        "resourceGroup": { "type": "string" },
+        "location": { "type": "string", "default": "canadacentral" },
+        "namePrefix": {
+          "type": "string",
+          "description": "5-15 chars, lowercase, used as prefix for Function app, Cosmos, storage."
+        }
+      }
+    }
+  }
+}

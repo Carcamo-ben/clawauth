@@ -1,0 +1,24 @@
+{
+  "name": "clawauth-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Self-hosted social auth for Azure Functions + Cosmos. Escape Microsoft External ID.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "echo \"(no lint configured yet)\"",
+    "clean": "npm run clean --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

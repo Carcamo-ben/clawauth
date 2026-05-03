@@ -1,0 +1,9 @@
+{
+  "$schema": "./clawauth.config.schema.json",
+  "googleClientId": "PASTE_YOUR_GOOGLE_OAUTH_CLIENT_ID_HERE.apps.googleusercontent.com",
+  "azure": {
+    "resourceGroup": "rg-clawauth-demo",
+    "location": "canadacentral",
+    "namePrefix": "clawauth-demo"
+  }
+}

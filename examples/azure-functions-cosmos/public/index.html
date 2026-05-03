@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>clawauth demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 480px; margin: 4rem auto; padding: 1rem; color: #222; }
+    button { font-size: 1rem; padding: .6rem 1rem; cursor: pointer; }
+    pre { background: #f5f5f5; padding: 1rem; overflow: auto; border-radius: 6px; }
+    .row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1>🦞 clawauth demo</h1>
+  <p>Paste your Google OAuth Client ID into <code>clawauth.config.json</code>, run <code>npm run dev</code>, then click below.</p>
+  <div class="row">
+    <button id="signin">Sign in with Google</button>
+    <button id="signout" hidden>Sign out</button>
+    <button id="call" hidden>Call /api/profile</button>
+  </div>
+  <h3>Session</h3>
+  <pre id="state">(signed out)</pre>
+  <h3>API response</h3>
+  <pre id="api">(none)</pre>
+
+  <script type="module">
+    // For local dev we import the built ESM. For prod-bundling, use a bundler.
+    import { createClawAuthClient } from '/clawauth-client.mjs';
+
+    const cfg = await fetch('/clawauth.config.json').then(r => r.json());
+    if (!cfg.googleClientId || cfg.googleClientId.startsWith('PASTE_')) {
+      document.getElementById('state').textContent =
+        'ERROR: paste your Google Client ID into clawauth.config.json first.';
+    }
+
+    const auth = createClawAuthClient({
+      googleClientId: cfg.googleClientId,
+      apiBase: '/api',
+      onChange: render
+    });
+    render(auth.state());
+
+    document.getElementById('signin').onclick = () => auth.signInWithGoogle().catch(showError);
+    document.getElementById('signout').onclick = () => auth.signOut();
+    document.getElementById('call').onclick = async () => {
+      const res = await auth.fetch('/api/profile');
+      document.getElementById('api').textContent = res.status + ' ' + await res.text();
+    };
+
+    function render(state) {
+      document.getElementById('state').textContent = JSON.stringify(state, null, 2);
+      document.getElementById('signin').hidden = state.signedIn;
+      document.getElementById('signout').hidden = !state.signedIn;
+      document.getElementById('call').hidden = !state.signedIn;
+    }
+    function showError(err) {
+      document.getElementById('state').textContent = 'ERROR: ' + err.message;
+    }
+  </script>
+</body>
+</html>

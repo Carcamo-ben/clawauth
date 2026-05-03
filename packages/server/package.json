@@ -1,0 +1,51 @@
+{
+  "name": "@clawauth/server",
+  "version": "0.1.0",
+  "description": "Server-side core for clawauth: JWT mint/verify, refresh token rotation, pluggable IdPs and storage.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./storage/cosmos": {
+      "types": "./dist/storage/cosmos.d.ts",
+      "import": "./dist/storage/cosmos.js"
+    },
+    "./storage/memory": {
+      "types": "./dist/storage/memory.d.ts",
+      "import": "./dist/storage/memory.js"
+    },
+    "./providers/google": {
+      "types": "./dist/providers/google.d.ts",
+      "import": "./dist/providers/google.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "jose": "^5.9.6",
+    "google-auth-library": "^10.6.2"
+  },
+  "peerDependencies": {
+    "@azure/cosmos": "^4.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@azure/cosmos": { "optional": true }
+  },
+  "devDependencies": {
+    "@azure/cosmos": "^4.2.0",
+    "@types/node": "^20.16.10",
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.5"
+  },
+  "engines": { "node": ">=20" }
+}

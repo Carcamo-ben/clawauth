@@ -1,0 +1,31 @@
+{
+  "name": "@clawauth/azure-functions",
+  "version": "0.1.0",
+  "description": "Azure Functions v4 adapter for clawauth. Mount in 3 lines.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@clawauth/server": "0.1.0"
+  },
+  "peerDependencies": {
+    "@azure/functions": "^4.5.0"
+  },
+  "devDependencies": {
+    "@azure/functions": "^4.5.0",
+    "@types/node": "^20.16.10",
+    "typescript": "^5.5.4"
+  }
+}

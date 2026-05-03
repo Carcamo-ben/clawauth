@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "COSMOS_CONN": "AccountEndpoint=https://localhost:8081/;AccountKey=...replace-with-emulator-or-real..."
+  },
+  "Host": {
+    "CORS": "*",
+    "LocalHttpPort": 7071
+  }
+}

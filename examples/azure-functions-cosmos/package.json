@@ -1,0 +1,25 @@
+{
+  "name": "clawauth-example-azure-functions-cosmos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end clawauth example: Azure Functions + Cosmos + tiny SPA. Paste your Google client ID and run `npm run dev` or `npm run deploy`.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prestart": "npm run build",
+    "start": "func start --javascript",
+    "dev": "node scripts/dev.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "destroy": "node scripts/destroy.mjs"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.5.0",
+    "@clawauth/azure-functions": "0.1.0",
+    "@clawauth/server": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "@types/node": "^20.16.10"
+  },
+  "engines": { "node": ">=20" }
+}
